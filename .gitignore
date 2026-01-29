@@ -1,0 +1,9 @@
+# Fichiers sensibles
+get_token.py
+
+# Python
+__pycache__/
+*.pyc
+
+# Environnement
+.env
