@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 import requests
@@ -40,8 +41,11 @@ def get_kobo_data():
 
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    debug = os.environ.get("FLASK_DEBUG", "true").lower() == "true"
+
     print("=" * 50)
-    print("Serveur démarré sur http://localhost:5000")
+    print(f"Serveur démarré sur http://localhost:{port}")
     print("Ouvrez cette adresse dans votre navigateur")
     print("=" * 50)
-    app.run(debug=True, port=5000)
+    app.run(debug=debug, host="0.0.0.0", port=port)
