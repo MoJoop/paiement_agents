@@ -230,11 +230,15 @@
             indicator.classList.add('active');
 
             try {
-                // Utilise le proxy local pour éviter les problèmes CORS
-                const url = '/api/data';
+                // Utilise un proxy CORS pour GitHub Pages
+                const koboUrl = `${KOBO_CONFIG.baseUrl}/api/v2/assets/${KOBO_CONFIG.formId}/data.json`;
+                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(koboUrl)}`;
 
-                const response = await fetch(url, {
-                    method: 'GET'
+                const response = await fetch(proxyUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${KOBO_CONFIG.token}`
+                    }
                 });
 
                 if (!response.ok) {
